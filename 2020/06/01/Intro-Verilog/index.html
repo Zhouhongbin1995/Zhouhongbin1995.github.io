@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdn.net/20171023180754064">
 <meta property="article:published_time" content="2020-06-01T11:47:55.198Z">
-<meta property="article:modified_time" content="2020-06-04T12:25:06.914Z">
+<meta property="article:modified_time" content="2020-06-04T12:31:17.146Z">
 <meta property="article:author" content="Hongbin Zhou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdn.net/20171023180754064">
@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-04 20:25:06" itemprop="dateModified" datetime="2020-06-04T20:25:06+08:00">2020-06-04</time>
+                <time title="Modified: 2020-06-04 20:31:17" itemprop="dateModified" datetime="2020-06-04T20:31:17+08:00">2020-06-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -344,7 +344,7 @@
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> ShiftRegister(IN,OUT,clk,reset);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">input</span> IN,clk;</span><br><span class="line">    <span class="keyword">output</span> OUT;</span><br><span class="line">    <span class="keyword">reg</span>[<span class="number">3</span>:<span class="number">0</span>] OUT;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">always</span>@(<span class="keyword">posedge</span> clk)</span><br><span class="line">        <span class="keyword">if</span> (reset)</span><br><span class="line">         OUT&lt;=<span class="number">4'b000</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            OUT&lt;=&#123;OUT[<span class="number">2</span>,<span class="number">0</span>],IN&#125;;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>有限状态机__1bit输入至三连1则输出1</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> FSM(IN,OUT,reset,clk);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">input</span> IN;</span><br><span class="line">    <span class="keyword">output</span> OUT;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">always</span>@(<span class="keyword">posedge</span> clk)</span><br><span class="line">        <span class="keyword">if</span> (reset)</span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Check111(IN,OUT,reset,clk);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">input</span> IN;</span><br><span class="line">    <span class="keyword">output</span> OUT;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">always</span>@(<span class="keyword">posedge</span> clk)</span><br><span class="line">        <span class="keyword">if</span> (reset)</span><br><span class="line">            OUT&lt;=<span class="number">4'b0000</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        	<span class="keyword">begin</span></span><br><span class="line">                <span class="keyword">case</span>()</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <hr>
