@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文主要记录了一下Verilog初学的笔记，非常感谢西安电子科技大学的蔡觉平老师、NVIDIA的龚黎明工程师、北京航空航天大学的网络资源（PPT）及其他。 以下内容主要摘自Verilog HDL数字集成电路__设计原理与应用（第二版），蔡觉平等编著。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Intro_Verilog">
+<meta property="og:url" content="http://yoursite.com/2020/06/01/Intro-Verilog/index.html">
+<meta property="og:site_name" content="Main Page">
+<meta property="og:description" content="本文主要记录了一下Verilog初学的笔记，非常感谢西安电子科技大学的蔡觉平老师、NVIDIA的龚黎明工程师、北京航空航天大学的网络资源（PPT）及其他。 以下内容主要摘自Verilog HDL数字集成电路__设计原理与应用（第二版），蔡觉平等编著。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdn.net/20171023180754064">
+<meta property="article:published_time" content="2020-06-01T11:47:55.198Z">
+<meta property="article:modified_time" content="2020-06-01T13:54:34.750Z">
+<meta property="article:author" content="Hongbin Zhou">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20171023180754064">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/01/Intro-Verilog/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Intro_Verilog | Main Page</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Main Page</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/Intro-Verilog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+      <meta itemprop="name" content="Hongbin Zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Main Page">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Intro_Verilog
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-01 19:47:55 / Modified: 21:54:34" itemprop="dateCreated datePublished" datetime="2020-06-01T19:47:55+08:00">2020-06-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/EE/" itemprop="url" rel="index"><span itemprop="name">EE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文主要记录了一下Verilog初学的笔记，非常感谢西安电子科技大学的蔡觉平老师、NVIDIA的龚黎明工程师、北京航空航天大学的网络资源（PPT）及其他。</p>
+<p>以下内容主要摘自Verilog HDL数字集成电路__设计原理与应用（第二版），蔡觉平等编著。</p>
+<a id="more"></a>
+<blockquote>
+<p>并非<strong>语言</strong>本身有多么正确，有力，或者优美，而在于它所体现出来的思想的力量。-歌德</p>
+</blockquote>
+<h1 id="第一章-概论"><a href="#第一章-概论" class="headerlink" title="第一章 概论"></a>第一章 概论</h1><p>语言做为人描述事物的通用方式，有着一定的语法。数字电路设计的宗旨在于满足实际逻辑关系的需要，因此，任何模块都必须满足一定的逻辑关系。硬件描述语言是人描述数字硬件和系统的工具，其中Verilog是义中常用的硬件描述语言，可以从系统及、电路及、门级到开关机等抽象层次进行数字电路系统的建模、设计和验证工作，即可分为可综合与不可综合语句之分。</p>
+<p><img src="https://img-blog.csdn.net/20171023180754064" alt title="IC设计流程图"></p>
+<p><a href="https://www.baidu.com/link?url=8LzULeEkqJxY33P5xz0k0w7aL6wBOjvKC2ysvJaW11CZ-YNfsluaLSjV3vIe-mE1yPXvZ7_mi54s97U6BlqEWsjK9_mIynRyU0jcqQ-P2ua&amp;ck=1883.1.79.302.396.302.394.243&amp;shh=www.baidu.com&amp;sht=44004473_3_oem_dg&amp;wd=&amp;eqid=ed11e64a00172c5f000000035ed4fcea" target="_blank" rel="noopener">IC设计流程概述</a></p>
+<p><strong>1. 规格制定</strong><br>    芯片规格，也就像功能列表一样，是客户向芯片设计公司（称为Fabless，无晶圆设计公司）提出的设计要求，包括芯片需要达到的具体功能和性能方面的要求</p>
+<p><strong>2. 详细设计</strong><br>    Fabless根据客户提出的规格要求，拿出设计解决方案和具体实现架构，划分模块功能</p>
+<p><strong>3. HDL编码</strong><br>    使用硬件描述语言（VHDL，Verilog HDL，业界公司一般都是使用后者）将模块功能以代码来描述实现，也就是将实际的硬件电路功能通过HDL语言描述出来，形成RTL（寄存器传输级）代码</p>
+<p><strong>4. 仿真验证</strong><br> 仿真验证就是检验编码设计的正确性，检验的标准就是第一步制定的规格。看设计是否精确地满足了规格中的所有要求。规格是设计正确与否的黄金标准，一切违反，不符合规格要求的，就需要重新修改设计和编码。 设计和仿真验证是反复迭代的过程，直到验证结果显示完全符合规格标准<br>    仿真验证工具Synopsys的VCS，还有Cadence的NC-Verilog</p>
+<p><strong>5. 逻辑综合―Design Compiler</strong><br>    仿真验证通过，进行逻辑综合；逻辑综合的结果就是把设计实现的HDL代码翻译成门级网表netlist；综合需要设定约束条件，就是你希望综合出来的电路在面积，时序等目标参数上达到的标准，逻辑综合需要基于特定的综合库，不同的库中，门电路基本标准单元（standard cell）的面积，时序参数是不一样的；所以，选用的综合库不一样，综合出来的电路在时序，面积上是有差异的。一般来说，综合完成后需要再次做仿真验证（这个也称为后仿真，之前的称为前仿真）。逻辑综合工具Synopsys的Design Compiler</p>
+<p><strong>6. STA</strong><br>    Static Timing Analysis（STA），静态时序分析，这也属于验证范畴，它主要是在时序上对电路进行验证，检查电路是否存在建立时间（setup time）和保持时间（hold time）的违例（violation）；这个是数字电路基础知识，一个寄存器出现这两个时序违例时，是没有办法正确采样数据和输出数据的，所以以寄存器为基础的数字芯片功能肯定会出现问题。STA工具有Synopsys的Prime Time</p>
+<p><strong>7. 形式验证</strong><br>    这也是验证范畴，它是从功能上（STA是时序上）对综合后的网表进行验证；常用的就是等价性检查方法，以功能验证后的HDL设计为参考，对比综合后的网表功能，他们是否在功能上存在等价性；这样做是为了保证在逻辑综合过程中没有改变原先HDL描述的电路功能。形式验证工具有Synopsys的Formality</p>
+<hr>
+<p><strong>1. DFT</strong><br>    Design For Test，可测性设计；芯片内部往往都自带测试电路，DFT的目的就是在设计的时候就考虑将来的测试；DFT的常见方法就是，在设计中插入扫描链，将非扫描单元（如寄存器）变为扫描单元；关于DFT，有些书上有详细介绍，对照图片就好理解一点。DFT工具Synopsys的DFT Compiler<br> <strong>2. 布局规划(FloorPlan)</strong><br>    布局规划就是放置芯片的宏单元模块，在总体上确定各种功能电路的摆放位置，如IP模块，RAM，I/O引脚等等；布局规划能直接影响芯片最终的面积。工具为Synopsys的Astro</p>
+<p><strong>3. CTS</strong><br>    Clock Tree Synthesis，时钟树综合，简单点说就是时钟的布线；由于时钟信号在数字芯片的全局指挥作用，它的分布应该是对称式的连到各个寄存器单元，从而使时钟从同一个时钟源到达各个寄存器时，时钟延迟差异最小；这也是为什么时钟信号需要单独布线的原因；CTS工具，Synopsys的Physical Compiler</p>
+<p><strong>4. 布线(Place &amp; Route)</strong><br>    这里的布线就是普通信号布线了，包括各种标准单元（基本逻辑门电路）之间的走线；比如我们平常听到的0.13um工艺，或者说90nm工艺，实际上就是这里金属布线可以达到的最小宽度，从微观上看就是MOS管的沟道长度 </p>
+<p><strong>5. 寄生参数提取</strong><br>    由于导线本身存在的电阻，相邻导线之间的互感,耦合电容在芯片内部会产生信号噪声，串扰和反射；这些效应会产生信号完整性问题，导致信号电压波动和变化，如果严重就会导致信号失真错误；提取寄生参数进行再次的分析验证，分析信号完整性问题是非常重要的。工具Synopsys的Star-RCXT</p>
+<p><strong>6. 版图物理验证</strong><br>    对完成布线的物理版图进行功能和时序上的验证，验证项目很多，如LVS（Layout Vs Schematic）验证，简单说，就是版图与逻辑综合后的门级电路图的对比验证；DRC（Design Rule Checking）：设计规则检查，检查连线间距，连线宽度等是否满足工艺要求，ERC（Electrical Rule Checking）：电气规则检查，检查短路和开路等电气 规则违例；工具为Synopsys的Hercules</p>
+<hr>
+<h1 id="第二章-Verilog语言要素"><a href="#第二章-Verilog语言要素" class="headerlink" title="第二章 Verilog语言要素"></a>第二章 Verilog语言要素</h1><ol>
+<li><p>Verilog模块的基本结构</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Name( In1, In2, Out1, Out2, InOut1 );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">input</span> in1, in2;</span><br><span class="line">    <span class="keyword">output</span> Out1, Out2;</span><br><span class="line">    <span class="keyword">inout</span> InOut1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">wire</span> In1, In2, Out1;</span><br><span class="line">    <span class="keyword">wire</span> InOut1;</span><br><span class="line">    <span class="keyword">reg</span> Out2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ( Gate Level )</span></span><br><span class="line">    <span class="keyword">and</span> and1( Out1, In1, In2 );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ( Dataflow Level )</span></span><br><span class="line">    <span class="keyword">assign</span> Out1 = In1 &amp; In2;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ( Behavior Level )</span></span><br><span class="line">    allways @(<span class="meta">`) </span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">        Out2 = In1 &amp; In2;</span><br><span class="line">        Out2 &lt;= In1 &amp; In2;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>数据类型包括了19种，常用wire、reg和parameter。</li>
+<li></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/01/MarkdownStart/" rel="prev" title="Markdown-Start">
+      <i class="fa fa-chevron-left"></i> Markdown-Start
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="<MTAyMC81MDMzNi8yNjgyNg==>"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-概论"><span class="nav-number">1.</span> <span class="nav-text">第一章 概论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-Verilog语言要素"><span class="nav-number">2.</span> <span class="nav-text">第二章 Verilog语言要素</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hongbin Zhou"
+      src="/images/avatar2.jpg">
+  <p class="site-author-name" itemprop="name">Hongbin Zhou</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hongbin Zhou</span>
+</div>
+
+<!--
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div> -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
