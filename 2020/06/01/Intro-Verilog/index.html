@@ -22,7 +22,7 @@
 
   <meta name="description" content="本文主要记录了一下Verilog初学的笔记，非常感谢西安电子科技大学的蔡觉平老师、NVIDIA的龚黎明工程师、北京航空航天大学的网络资源（PPT）、HDLBits及其他。 以下内容主要摘自Verilog HDL数字集成电路__设计原理与应用（第二版），蔡觉平等编著。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Intro_Verilog">
+<meta property="og:title" content="Intro Verilog">
 <meta property="og:url" content="http://yoursite.com/2020/06/01/Intro-Verilog/index.html">
 <meta property="og:site_name" content="Main Page">
 <meta property="og:description" content="本文主要记录了一下Verilog初学的笔记，非常感谢西安电子科技大学的蔡觉平老师、NVIDIA的龚黎明工程师、北京航空航天大学的网络资源（PPT）、HDLBits及其他。 以下内容主要摘自Verilog HDL数字集成电路__设计原理与应用（第二版），蔡觉平等编著。">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://img-blog.csdn.net/20171023180754064">
 <meta property="og:image" content="http://yoursite.com/2020/06/01/Intro-Verilog/%E7%9C%9F%E5%80%BC%E8%A1%A8.png">
 <meta property="article:published_time" content="2020-06-01T11:47:55.198Z">
-<meta property="article:modified_time" content="2020-06-07T04:50:49.366Z">
+<meta property="article:modified_time" content="2020-06-07T10:24:25.278Z">
 <meta property="article:author" content="Hongbin Zhou">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdn.net/20171023180754064">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>Intro_Verilog | Main Page</title>
+  <title>Intro Verilog | Main Page</title>
   
 
 
@@ -165,7 +165,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Intro_Verilog
+          Intro Verilog
         </h1>
 
         <div class="post-meta">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-07 12:50:49" itemprop="dateModified" datetime="2020-06-07T12:50:49+08:00">2020-06-07</time>
+                <time title="Modified: 2020-06-07 18:24:25" itemprop="dateModified" datetime="2020-06-07T18:24:25+08:00">2020-06-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,15 +310,15 @@
 <ul>
 <li>逻辑表达式</li>
 </ul>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">module</span> design2(A,B,C,OUT);</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">input</span> A,B,C;</span><br><span class="line">       <span class="keyword">output</span> OUT;</span><br><span class="line">       </span><br><span class="line">    <span class="keyword">assign</span> OUT=(A&amp;B)|(B&amp;C)|(A&amp;C)；</span><br><span class="line">           </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> design2(A,B,C,OUT);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">input</span> A,B,C;</span><br><span class="line">    <span class="keyword">output</span> OUT;</span><br><span class="line">    </span><br><span class="line"> <span class="keyword">assign</span> OUT=(A&amp;B)|(B&amp;C)|(A&amp;C)；</span><br><span class="line">      </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>门级语法</li>
 </ul>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> design3(A,B,C,OUT);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">input</span> A,B,C;</span><br><span class="line">    <span class="keyword">output</span> OUT;</span><br><span class="line">    </span><br><span class="line"> <span class="keyword">and</span> U1(w1,A,B);</span><br><span class="line">    <span class="keyword">and</span> U2(w2,A,C);</span><br><span class="line"> <span class="keyword">and</span> U3(w3,B,C);</span><br><span class="line">    <span class="keyword">or</span> U4(w4,A,B);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> design3(A,B,C,OUT);</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">input</span> A,B,C;</span><br><span class="line">       <span class="keyword">output</span> OUT;</span><br><span class="line">       </span><br><span class="line">    <span class="keyword">and</span> U1(w1,A,B);</span><br><span class="line">       <span class="keyword">and</span> U2(w2,A,C);</span><br><span class="line">    <span class="keyword">and</span> U3(w3,B,C);</span><br><span class="line">       <span class="keyword">or</span> U4(w4,A,B);</span><br><span class="line">       </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>抽象描述方法</li>
 </ul>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> design4(A,B,C,OUT);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">input</span> A,B,C;</span><br><span class="line">    <span class="keyword">output</span> OUT;</span><br><span class="line">    <span class="keyword">wire</span> SUM</span><br><span class="line"> <span class="keyword">reg</span> OUT</span><br><span class="line">    </span><br><span class="line"> <span class="keyword">assign</span> SUM=A+B+C;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">always</span>@(*)</span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">if</span>(SUM&gt;<span class="number">1</span>)</span><br><span class="line">                OUT=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                OUT=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> design4(A,B,C,OUT);</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">input</span> A,B,C;</span><br><span class="line">       <span class="keyword">output</span> OUT;</span><br><span class="line">       <span class="keyword">wire</span> SUM</span><br><span class="line">    <span class="keyword">reg</span> OUT</span><br><span class="line">       </span><br><span class="line">    <span class="keyword">assign</span> SUM=A+B+C;</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">always</span>@(*)</span><br><span class="line">           <span class="keyword">begin</span></span><br><span class="line">               <span class="keyword">if</span>(SUM&gt;<span class="number">1</span>)</span><br><span class="line">                   OUT=<span class="number">1</span>;</span><br><span class="line">               <span class="keyword">else</span></span><br><span class="line">                   OUT=<span class="number">0</span>;</span><br><span class="line">           <span class="keyword">end</span></span><br><span class="line">       </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>N位加法器</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> N_adder(A,B,OUT,C_OUT);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">parameter</span> N;</span><br><span class="line">    <span class="keyword">input</span>[N-<span class="number">1</span>:<span class="number">0</span>] A,B;</span><br><span class="line">    <span class="keyword">output</span>[N:<span class="number">0</span>] OUT;</span><br><span class="line">    <span class="keyword">output</span> C_OUT;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assign</span> OUT=A+B;</span><br><span class="line">    <span class="keyword">assign</span> C_OUT=(&amp;A)&amp;&amp;(&amp;B);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
@@ -380,12 +380,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/01/MarkdownStart/" rel="prev" title="Markdown-Start">
-      <i class="fa fa-chevron-left"></i> Markdown-Start
+    <a href="/2020/06/01/MarkdownStart/" rel="prev" title="Markdown Start">
+      <i class="fa fa-chevron-left"></i> Markdown Start
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/06/02/Intro-Linux/" rel="next" title="Intro_Linux">
-      Intro_Linux <i class="fa fa-chevron-right"></i>
+    <a href="/2020/06/02/Intro-Linux/" rel="next" title="Intro Linux">
+      Intro Linux <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -465,7 +465,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
