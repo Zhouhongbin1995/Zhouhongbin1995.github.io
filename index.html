@@ -144,6 +144,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/08/Intro-Intel-FPGA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar2.jpg">
+      <meta itemprop="name" content="Hongbin Zhou">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Main Page">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/08/Intro-Intel-FPGA/" class="post-title-link" itemprop="url">Intro_Intel_FPGA</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-08 21:52:01" itemprop="dateCreated datePublished" datetime="2020-06-08T21:52:01+08:00">2020-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-17 21:42:13" itemprop="dateModified" datetime="2020-06-17T21:42:13+08:00">2020-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/EE/" itemprop="url" rel="index"><span itemprop="name">EE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Chapter-1"><a href="#Chapter-1" class="headerlink" title="Chapter 1"></a>Chapter 1</h1><hr>
+<h1 id="Chapter-2-FPGA设计基本流程"><a href="#Chapter-2-FPGA设计基本流程" class="headerlink" title="Chapter 2 FPGA设计基本流程"></a>Chapter 2 FPGA设计基本流程</h1><ol>
+<li>设计定义</li>
+<li>设计输入</li>
+<li>分析与综合</li>
+<li>功能仿真</li>
+<li>布局布线</li>
+<li>时序仿真</li>
+<li>IO配置及烧写调试</li>
+</ol>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> led_test(</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">input</span> a,</span><br><span class="line">    <span class="keyword">input</span> b,</span><br><span class="line">    <span class="keyword">input</span> key_in,</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">output</span> led_out</span><br><span class="line">);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assign</span> led_out = (key_in == <span class="number">0</span>)? a : b;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">`<span class="meta-keyword">timescale</span> 1ns/1ps</span></span><br><span class="line"><span class="meta">`<span class="meta-keyword">define</span> clock_period 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> led_test_tb;</span><br><span class="line">    <span class="comment">//激励信号定义</span></span><br><span class="line">    <span class="keyword">reg</span> a,b,c;</span><br><span class="line">    <span class="comment">//待测试信号定义</span></span><br><span class="line">    <span class="keyword">wire</span> led_out;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//模块例化</span></span><br><span class="line">    led_test u0 (</span><br><span class="line">    <span class="variable">.a</span>(a),</span><br><span class="line">    <span class="variable">.b</span>(b),</span><br><span class="line">    <span class="variable">.key_in</span>(key_in),</span><br><span class="line">    <span class="variable">.led_out</span>(led_out)</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">    /产生激励</span><br><span class="line">    <span class="keyword">initial</span></span><br><span class="line">    	<span class="keyword">begin</span></span><br><span class="line">            a=<span class="number">0</span>;b=<span class="number">0</span>;key_in=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">0</span>;b=<span class="number">0</span>;key_in=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">0</span>;b=<span class="number">1</span>;key_in=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">0</span>;b=<span class="number">1</span>;key_in=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">1</span>;b=<span class="number">0</span>;key_in=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">1</span>;b=<span class="number">0</span>;key_in=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">1</span>;b=<span class="number">1</span>;key_in=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">1</span>;b=<span class="number">1</span>;key_in=<span class="number">1</span>;</span><br><span class="line">            <span class="built_in">$stop</span></span><br><span class="line">    	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h1 id="Chapter-3-38译码器"><a href="#Chapter-3-38译码器" class="headerlink" title="Chapter 3 38译码器"></a>Chapter 3 38译码器</h1><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> my3_8(</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">input</span> a,</span><br><span class="line">    <span class="keyword">input</span> b,</span><br><span class="line">    <span class="keyword">input</span> c,</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">output</span> [<span class="number">7</span>:<span class="number">0</span>]out</span><br><span class="line">);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">always</span>@(*)</span><br><span class="line">        <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">case</span>(&#123;a,b,c&#125;)</span><br><span class="line">                <span class="number">3'b000</span>:out=<span class="number">8'b0000_0001</span>;</span><br><span class="line">                <span class="number">3'b001</span>:out=<span class="number">8'b0000_0010</span>;</span><br><span class="line">                <span class="number">3'b010</span>:out=<span class="number">8'b0000_0100</span>;</span><br><span class="line">                <span class="number">3'b011</span>:out=<span class="number">8'b0000_1000</span>;</span><br><span class="line">                <span class="number">3'b100</span>:out=<span class="number">8'b0001_0000</span>;</span><br><span class="line">                <span class="number">3'b101</span>:out=<span class="number">8'b0010_0000</span>;</span><br><span class="line">                <span class="number">3'b110</span>:out=<span class="number">8'b0100_0000</span>;</span><br><span class="line">                <span class="number">3'b111</span>:out=<span class="number">8'b1000_0000</span>;</span><br><span class="line">                <span class="keyword">default</span>:out=<span class="number">8'b1000_0000</span>;</span><br><span class="line">            <span class="keyword">endcase</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> led_test_tb;</span><br><span class="line">    <span class="comment">//激励信号定义</span></span><br><span class="line">    <span class="keyword">reg</span> a,b,c;</span><br><span class="line">    <span class="comment">//待测试信号定义</span></span><br><span class="line">    <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>]out;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//模块例化</span></span><br><span class="line">    my3_8 u0 (</span><br><span class="line">        <span class="variable">.a</span>(a),</span><br><span class="line">        <span class="variable">.b</span>(b),</span><br><span class="line">        <span class="variable">.c</span>(c),</span><br><span class="line">        <span class="variable">.out</span>(out)</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">    /产生激励</span><br><span class="line">    <span class="keyword">initial</span></span><br><span class="line">    	<span class="keyword">begin</span></span><br><span class="line">            a=<span class="number">0</span>;b=<span class="number">0</span>;c=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">0</span>;b=<span class="number">0</span>;c=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">0</span>;b=<span class="number">1</span>;c=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">0</span>;b=<span class="number">1</span>;c=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">1</span>;b=<span class="number">0</span>;c=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">1</span>;b=<span class="number">0</span>;c=<span class="number">1</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">1</span>;b=<span class="number">1</span>;c=<span class="number">0</span>;</span><br><span class="line">        #<span class="number">100</span>;</span><br><span class="line">            a=<span class="number">1</span>;b=<span class="number">1</span>;c=<span class="number">1</span>;</span><br><span class="line">            <span class="built_in">$stop</span></span><br><span class="line">    	<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>LOM IP方式__MegaWizard Plug-In Manager</p>
+<h1 id="Chpater-4-有限状态机"><a href="#Chpater-4-有限状态机" class="headerlink" title="Chpater 4 有限状态机"></a>Chpater 4 有限状态机</h1><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Hello(Clk,Res_n,data,led);</span><br><span class="line"> <span class="keyword">input</span> Clk;  <span class="comment">//50M</span></span><br><span class="line"> <span class="keyword">input</span> Res_n;  <span class="comment">//复位信号</span></span><br><span class="line"> </span><br><span class="line"> <span class="keyword">input</span> [<span class="number">7</span>:<span class="number">0</span>]data;  <span class="comment">//8位位宽的输入数据</span></span><br><span class="line"> </span><br><span class="line"> <span class="keyword">output</span> led;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//用独热码的编码方式定义状态</span></span><br><span class="line"><span class="comment">//文件内部使用，无法在外部被更改</span></span><br><span class="line"> <span class="keyword">localparam</span></span><br><span class="line">  CHECK_H = <span class="number">5'b0_0001</span>,</span><br><span class="line">  CHECK_e = <span class="number">5'b0_0010</span>,</span><br><span class="line">  CHECK_la = <span class="number">5'b0_0100</span>,</span><br><span class="line">  CHECK_lb = <span class="number">5'b0_1000</span>,</span><br><span class="line">  CHECK_o = <span class="number">5'b1_0000</span>;</span><br><span class="line">  </span><br><span class="line"> <span class="keyword">reg</span> [<span class="number">4</span>:<span class="number">0</span>] state;  <span class="comment">//状态所需寄存器,独热码为5位位宽</span></span><br><span class="line"> </span><br><span class="line"> <span class="keyword">always</span> @(<span class="keyword">posedge</span> Clk <span class="keyword">or</span> <span class="keyword">negedge</span> Res_n)</span><br><span class="line"> <span class="keyword">if</span>(!Res_n)<span class="keyword">begin</span></span><br><span class="line">  led &lt;= <span class="number">1'b1</span>;</span><br><span class="line">  state &lt;= CHECK_H;</span><br><span class="line"> <span class="keyword">end</span></span><br><span class="line"> <span class="keyword">else</span> <span class="keyword">begin</span> </span><br><span class="line">  <span class="keyword">case</span>(state)</span><br><span class="line">   CHECK_H:</span><br><span class="line">    <span class="keyword">if</span>(data == <span class="string">"H"</span>)</span><br><span class="line">     state &lt;= CHECK_e;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">     state &lt;= CHECK_H;</span><br><span class="line">   CHECK_e:</span><br><span class="line">    <span class="keyword">if</span>(data == <span class="string">"e"</span>)</span><br><span class="line">     state &lt;= CHECK_la;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">     state &lt;= CHECK_H;</span><br><span class="line">   CHECK_La:</span><br><span class="line">    <span class="keyword">if</span>(data == <span class="string">"l"</span>)</span><br><span class="line">     state &lt;= CHECK_lb;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">     state &lt;= CHECK_H;</span><br><span class="line">   CHECK_lb:</span><br><span class="line">    <span class="keyword">if</span>(data == <span class="string">"l"</span>)</span><br><span class="line">     state &lt;= CHECK_o;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">     state &lt;= CHECK_H;</span><br><span class="line">   CHECK_o:</span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">    state &lt;= CHECK_H;</span><br><span class="line">    <span class="keyword">if</span>(data == <span class="string">"o"</span>)</span><br><span class="line">     led &lt;= ~led;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">     led &lt;= led;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">default</span>:</span><br><span class="line">    state &lt;=CHECK_H;</span><br><span class="line">  <span class="keyword">endcase</span></span><br><span class="line"> <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/IC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -167,10 +256,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-06-07 16:20:43 / Modified: 16:21:16" itemprop="dateCreated datePublished" datetime="2020-06-07T16:20:43+08:00">2020-06-07</time>
+              <time title="Created: 2020-06-07 16:20:43" itemprop="dateCreated datePublished" datetime="2020-06-07T16:20:43+08:00">2020-06-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-08 16:58:26" itemprop="dateModified" datetime="2020-06-08T16:58:26+08:00">2020-06-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,7 +337,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-07 20:48:29" itemprop="dateModified" datetime="2020-06-07T20:48:29+08:00">2020-06-07</time>
+                <time title="Modified: 2020-06-12 16:38:51" itemprop="dateModified" datetime="2020-06-12T16:38:51+08:00">2020-06-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -399,7 +494,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-07 18:24:25" itemprop="dateModified" datetime="2020-06-07T18:24:25+08:00">2020-06-07</time>
+                <time title="Modified: 2020-06-10 16:47:36" itemprop="dateModified" datetime="2020-06-10T16:47:36+08:00">2020-06-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -835,7 +930,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
